@@ -1,0 +1,82 @@
+﻿@using Etecsho.Models.Entites.Users
+@model User
+@{
+    ViewData["Title"] = "CheckTheSentCodeToMobile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div role="main" class="main position-relative z-index-2 z-index-mobile-0">
+    <div class="appear-animation animated fadeInUpShorter appear-animation-visible" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200" style="animation-delay: 200ms;">
+        <div class=" mt-5">
+            <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12 align-self-center p-static order-2 text-center">
+
+                            <h1 class="text-dark font-weight-bold text-8"> بازیابی کلمه ی عبور  </h1>
+                            <span class="sub-title text-dark"></span>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <hr class="solid my-5">
+    <div class="container mb-5 pb-4">
+
+        <div class="py-4">
+
+            <div class="row">
+                <div class="col">
+
+                    <div class="featured-boxes">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="featured-box featured-box-primary text-left mt-5" style="height: 450px;">
+                                    <div class="txr box-content">
+
+
+                                        <h4 class="color-primary font-weight-semibold text-4 text-uppercase mb-3">ورود</h4>
+                                        <form asp-action="CheckTheSentCodeToMobile" asp-controller="Account" id="frmSignIn" method="post" class="needs-validation" novalidate="novalidate">
+                                            <div class="form-row">
+                                                <div class="form-group col">
+                                                    <label class="font-weight-bold text-dark text-2">کد ارسالی   </label>
+                                                    <input type="text" asp-for="ActiveCode" class="form-control form-control-lg" required="">
+                                                    <span style="color:red" asp-validation-for="ActiveCode"></span>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="displayf form-group col-lg-6">
+                                                    <input type="submit" value="ثبت " class="btn btn-outline-success btn-modern float-right" data-loading-text="Loading...">
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+

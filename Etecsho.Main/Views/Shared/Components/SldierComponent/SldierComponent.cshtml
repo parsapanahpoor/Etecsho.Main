@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Etecsho.Models.Entites.Slider.Slider>
+@{
+    Layout = null;
+}
+
+<div class="slider-container rev_slider_wrapper" style="height: 100vh;">
+    <div id="revolutionSlider" class="slider rev_slider" data-version="5.4.8" data-plugin-revolution-slider data-plugin-options="{'sliderLayout': 'fullscreen', 'delay': 9000, 'gridwidth': 1140, 'gridheight': 800, 'responsiveLevels': [4096,1200,992,500]}">
+        <ul>
+
+            @foreach (var item in Model)
+            {
+
+
+
+
+            <li class="slide-overlay slide-overlay-gradient slide-overlay-gradient-animated slide-overlay-level-8" data-transition="fade">
+                <img src="/Slider/image/@item.BlogImageName"
+                     alt=""
+                     data-bgposition="center center"
+                     data-bgfit="cover"
+                     data-bgrepeat="no-repeat"
+                     class="rev-slidebg">
+               
+                    <div class="tp-caption text-color-light font-weight-normal"
+                         data-frames='[{"delay":700,"speed":1000,"frame":"0","from":"opacity:0;y:-50%;","to":"opacity:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                         data-x="center"
+                         data-y="center" data-voffset="['-100','-100','-100','-160']"
+                         data-fontsize="['20','20','20','40']"
+                         data-lineheight="['25','25','25','45']"> @item.FirstText</div>
+                    
+                <div class="tp-caption bg-color-light"
+                     data-frames='[{"delay":1500,"speed":1000,"frame":"0","from":"opacity:0;x:-50%;","to":"opacity:0.4;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                     data-x="center"
+                     data-y="center" data-voffset="['-65','-65','-65','-98']"
+                     data-width="['362','362','362','575']"
+                     data-height="8"></div>
+
+                <div class="tp-caption bg-color-light"
+                     data-frames='[{"delay":1500,"speed":1000,"frame":"0","from":"opacity:0;x:50%;","to":"opacity:0.4;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                     data-x="center"
+                     data-y="center" data-voffset="['65','65','65','98']"
+                     data-width="['362','362','362','575']"
+                     data-height="8"></div>
+
+                <div class="tp-caption bg-color-light"
+                     data-frames='[{"delay":1850,"speed":1000,"frame":"0","from":"opacity:0;y:-50%;","to":"opacity:0.4;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                     data-x="center" data-hoffset="['-185','-185','-185','-284']"
+                     data-y="center"
+                     data-width="8"
+                     data-height="['138','138','138','190']"></div>
+
+                <div class="tp-caption bg-color-light"
+                     data-frames='[{"delay":1850,"speed":1000,"frame":"0","from":"opacity:0;y:50%;","to":"opacity:0.4;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                     data-x="center" data-hoffset="['185','185','185','284']"
+                     data-y="center"
+                     data-width="8"
+                     data-height="['138','138','138','190']"></div>
+
+
+               
+                    <h1 class="tp-caption font-weight-extra-bold text-color-light"
+                        data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                        data-x="center"
+                        data-y="center"
+                        data-fontsize="['95','95','95','150']"
+                        data-lineheight="['105','105','105','155']">
+                        @item.SecondeText
+                    </h1>
+
+            <div class="tp-caption font-weight-light text-color-light ws-normal text-center"
+                 data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2300,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                 data-x="center"
+                 data-y="center" data-voffset="['110','110','110','200']"
+                 data-width="['325','325','325','550']"
+                 data-fontsize="['18','18','18','40']"
+                 data-lineheight="['26','26','26','45']">@item.ThirdText</div>
+
+            </li>
+            }
+
+        </ul>
+    </div>
+</div>

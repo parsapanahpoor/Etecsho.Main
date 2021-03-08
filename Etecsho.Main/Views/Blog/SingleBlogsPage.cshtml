@@ -1,0 +1,190 @@
+﻿@model Etecsho.Models.Entites.Blog.Blog
+@using Etecsho.Utilities.Convertors
+@{
+    ViewData["Title"] = Model.BlogTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div role="main" class="main position-relative z-index-2 z-index-mobile-0">
+    <div class="appear-animation animated fadeInUpShorter appear-animation-visible" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200" style="animation-delay: 200ms;">
+        <div class=" mt-5">
+            <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12 align-self-center p-static order-2 text-center">
+
+                            <h1 class="text-dark font-weight-bold text-8">@Model.BlogTitle</h1>
+                            <span class="sub-title text-dark"></span>
+
+                            <div class="post-meta paddingt-4">
+                                <span><i class="far fa-user"></i> توسط : <a href="#">@Model.Users.UserName</a> </span>
+                                <span>
+                                    <i class="far fa-folder"> </i>
+                                    @foreach (var tag in Model.Tags.Split('-', StringSplitOptions.RemoveEmptyEntries))
+                                    {
+                                        <a asp-action="Index" asp-controller="Blog" asp-route-filter="@tag">@tag</a>
+
+                                    }
+
+
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <hr class="solid my-5">
+    <div class="container mb-5 pb-4">
+
+        <div class="py-4">
+
+            <div class="row">
+                <div class="col">
+                    <div class="txr blog-posts single-post">
+
+                        <article class="post post-large blog-single-post border-0 m-0 p-0">
+                            <div class="post-image ml-0">
+                                <a href="blog-post.html">
+                                    <img src="/Blog/image/@Model.BlogImageName" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="">
+                                </a>
+                            </div>
+
+                            <div class="post-date ml-0">
+                                <span class="day">@Model.CreateDate.Day</span>
+                                <span class="month">@Model.CreateDate.ToString("yyyy/MM")</span>
+                            </div>
+
+                            <div class="post-content ml-0">
+
+                                <h2 class="font-weight-bold"><a href="blog-post.html">@Model.ShortDescription </a></h2>
+
+                                <div class="post-meta">
+                                    <span><i class="far fa-user"></i> توسط :  <a href="#">@Model.Users.UserName</a> </span>
+                                    <span>
+                                        <i class="far fa-folder"></i>
+
+
+                                        @foreach (var tag in Model.Tags.Split('-', StringSplitOptions.RemoveEmptyEntries))
+                                        {
+                                            <a asp-action="Index" asp-controller="Blog" asp-route-filter="@tag">@tag</a>
+
+                                        }
+
+                                    </span>
+
+                                </div>
+
+                                @Html.Raw(Model.LongDescription)
+
+                                <div class="post-block mt-4 pt-2 post-author">
+                                    <h4 class="mb-3">نویسنده</h4>
+                                    <div class="img-thumbnail img-thumbnail-no-borders d-block pb-3">
+                                        <a href="blog-post.html">
+                                            <img src="/UserAvatar/@Model.Users.UserAvatar" alt="">
+                                        </a>
+                                    </div>
+                                    <p><strong class="name"><a href="#" class="text-4 pb-2 pt-2 d-block">@Model.Users.UserName</a></strong></p>
+                                </div>
+
+                                <div id="comments" class="post-block mt-5 post-comments">
+
+
+                                    <div class="post-block mt-5 post-leave-comment">
+
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+
+                                            <h4 class="mb-3">دیدگاه خود را وارد کنید</h4>
+
+                                            <form asp-action="CreateCommente" asp-controller="Blog"
+                                                  data-ajax="true"
+                                                  data-ajax-method="post"
+                                                  data-ajax-mode="replace"
+                                                  data-ajax-update="#listComment"
+                                                  data-ajax-success="Success"
+                                                  id="contactForm" class="contact-form p-4 rounded bg-color-grey" method="POST">
+
+
+                                                <div class="p-2">
+
+                                                    <input type="hidden" name="comment.BlogId" value="@Model.BlogId" />
+
+                                                    <div class="form-row">
+                                                        <div class="form-group col">
+                                                            <label class="required font-weight-bold text-dark">دیدگاه</label>
+                                                            <textarea maxlength="5000"
+                                                                      id="comment_Comment" name="comment.CommentBody"
+                                                                      data-msg-required="دیدگاه خود را وارد کنید" rows="8" class="form-control" required=""></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col mb-0">
+                                                            <input type="submit" value="ارسال دیدگاه" class="btn btn-primary btn-modern" data-loading-text="Loading...">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        }
+                                        else
+                                        {
+
+                                            <div class="alert alert-danger">
+                                                جهت درج نظر باید وارد سایت شوید
+                                            </div>
+
+                                        }
+
+                                    </div>
+
+
+                                    <h4 class="mb-3">  کامنت ها</h4>
+
+                                    <ul class="comments comment-list" id="listComment">
+
+
+
+
+
+                                    </ul>
+
+                                </div>
+
+
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+@section Scripts
+    {
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function Success() {
+            $("#comment_Comment").val("");
+        }
+
+        $(function() {
+            $("#listComment").load("/Blog/ShowComment/" + @Model.BlogId);
+        });
+
+        function pageComment(pageid) {
+            $("#listComment").load("/Blog/ShowComment/" + @Model.BlogId+"?pageId="+pageid);
+        }
+    </script>
+}

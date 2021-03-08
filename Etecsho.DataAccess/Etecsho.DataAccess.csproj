@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210301175621_addComments.cs" />
+    <Compile Remove="Migrations\20210301175621_addComments.Designer.cs" />
+    <Compile Remove="Migrations\20210301175950_addcommnets.cs" />
+    <Compile Remove="Migrations\20210301175950_addcommnets.Designer.cs" />
+    <Compile Remove="Migrations\20210301180523_addcommmmnets.cs" />
+    <Compile Remove="Migrations\20210301180523_addcommmmnets.Designer.cs" />
+    <Compile Remove="Migrations\20210301180650_addcomm.cs" />
+    <Compile Remove="Migrations\20210301180650_addcomm.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CoreCompat.System.Drawing.v2" Version="5.2.0-preview1-r131" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.7.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Etecsho.DataLayer\Etecsho.Models.csproj" />
+    <ProjectReference Include="..\Etecsho.Utilities\Etecsho.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

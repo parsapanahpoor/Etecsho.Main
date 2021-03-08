@@ -1,0 +1,33 @@
+﻿@using Etecsho.Utilities.Convertors
+@using Etecsho.Models.Entites.Comment
+@model Tuple<List<Comment>, int>
+
+
+
+@{
+    Layout = null;
+}
+
+
+@foreach (var item in Model.Item1)
+{
+    <li>
+        <div class="comment">
+            <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
+                <img class="avatar" alt="" src="/UserAvatar/@item.Users.UserAvatar">
+            </div>
+            <div class="comment-block">
+                <div class="comment-arrow"></div>
+                <span class="comment-by">
+                    <strong>@item.Users.UserName</strong>
+                   
+                </span>
+                <p>@item.CommentBody</p>
+                <span class="date float-right">@item.CreateDate.ToShamsi()</span>
+            </div>
+        </div>
+
+    </li>
+
+}
+

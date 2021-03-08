@@ -1,0 +1,14 @@
+﻿
+
+@if (User.Identity.IsAuthenticated)
+{
+    <li>
+        <a asp-action="ManageUserForLogin" asp-controller="Account" class="br-s">ورود به پنل </a>
+    </li>
+}
+@if (!User.Identity.IsAuthenticated)
+{
+    <li>
+        <a href="/Login" class="br-s">ورود</a>
+    </li>
+}

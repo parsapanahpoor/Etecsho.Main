@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Etecsho.Models.Entites.Blog.Video>
+    @using Etecsho.Utilities.Convertors
+    @foreach (var item in Model)
+    {
+
+        <li>
+            <div class="post-image">
+                <div class="img-thumbnail img-thumbnail-no-borders d-block">
+                    <a href="/Blog/SingleVideoPage/@item.VideoId">
+                        <img src="/Blog/thumb/@item.VideoImageName" alt="" width="50" height="50">
+                    </a>
+                </div>
+            </div>
+            <div class="txr post-info">
+                <a href="/Blog/SingleVideoPage/@item.VideoId">@item.VideoTitle</a>
+                <div class="txr post-meta">
+                    @item.CreateDate.ToShamsi()
+                </div>
+            </div>
+        </li>
+
+
+
+
+    }

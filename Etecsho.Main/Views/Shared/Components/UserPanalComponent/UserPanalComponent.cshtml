@@ -1,0 +1,30 @@
+﻿@model Etecsho.Models.Entites.Users.User
+@{
+    Layout = null;
+}
+
+<div class="col-lg-3 mt-4 mt-lg-0">
+
+    <div class="d-flex justify-content-center mb-4">
+        <div class="profile-image-outer-container">
+            <div class="profile-image-inner-container bg-color-primary">
+                <img src="/UserAvatar/@Model.UserAvatar">
+                <span class="profile-image-button bg-color-dark">
+                    <i class="fas fa-camera text-light"></i>
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <aside class="sidebar mt-2" id="sidebar">
+        <ul class="nav nav-list flex-column mb-5">
+            <li class="nav-item"><a class="txr nav-link text-dark active" href="/User/Home/EditProfile">ویرایش اطلاعات کاربری  </a></li>
+            <li class="nav-item"><a class="txr nav-link text-dark active" href="/User/Home/ChangePassword">تغییر کلمه ی عبور   </a></li>
+            <li class="nav-item"><a class="txr nav-link" href="#">سفارش های من</a></li>
+            <li class="nav-item"><a class="txr nav-link" href="/Logout">خروج</a></li>
+
+        </ul>
+    </aside>
+
+</div>

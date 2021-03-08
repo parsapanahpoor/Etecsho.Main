@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Etecsho.Models.Entites.Employee.Employee>
+@{
+    Layout = null;
+}
+
+<div class="row pb-3">
+    <div class="container py-4">
+
+        <div class="row">
+            <div class="col pb-4 text-center">
+                <h2 class="text-color-dark font-weight-normal text-5 mb-0 pt-2">معرفی <strong class="font-weight-extra-bold">تیم ما</strong></h2>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+            </div>
+        </div>
+        <div class="row pb-4 mb-2">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0 appear-animation animated fadeInRightShorter appear-animation-visible" data-appear-animation="fadeInRightShorter" style="animation-delay: 100ms;">
+                    <span class="thumb-info thumb-info-hide-wrapper-bg bg-transparent border-radius-0">
+                        <span class="thumb-info-wrapper border-radius-0">
+                            <a href="about-me.html">
+                                <img src="/UserAvatar/@item.UserAvatar" class="img-fluid border-radius-0" alt="">
+                                <span class="thumb-info-title">
+                                    <span class="thumb-info-inner">@item.UserName</span>
+                                    <span class="thumb-info-type">@item.EmployeeLevel</span>
+                                </span>
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption">
+                            <span class="txj thumb-info-caption-text">@item.Description </span>
+                            <span class="thumb-info-social-icons">
+                                <a target="_blank" href="http://www.facebook.com"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+                                <a href="http://www.twitter.com"><i class="fab fa-twitter"></i><span>Twitter</span></a>
+                                <a href="http://www.linkedin.com"><i class="fab fa-linkedin-in"></i><span>Linkedin</span></a>
+                            </span>
+                        </span>
+                    </span>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+
+</div>

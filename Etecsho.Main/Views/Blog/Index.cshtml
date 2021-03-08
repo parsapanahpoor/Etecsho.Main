@@ -1,0 +1,168 @@
+﻿@using Etecsho.Models.Entites.Blog
+@model Tuple<List<Blog>, int>
+@{
+    ViewData["Title"] = "اخبار و مقالات ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div role="main" class=" paddingt-4 main position-relative z-index-2 z-index-mobile-0">
+
+
+    <div class="appear-animation animated appear-animation-visible fadeInUpShorter" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200" style="animation-delay: 200ms;">
+        <div class="container">
+            <div class="row py-4">
+                <div class="col-md-12 align-self-center p-static order-2 text-center">
+
+                    <h1 class="text-dark font-weight-bold text-8">اخبار و مقالات</h1>
+                    <span class="sub-title text-dark">ای تکشو را به صورت تخصصی پیگیری کنید</span>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container py-4 class= appear-animation animated appear-animation-visible fadeInUpShorter" appear-animation"="" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200" style="animation-delay: 200ms;">
+        <form id="formFilter" asp-action="Index" asp-controller="Blog" method="get">
+            <input type="hidden" id="pageid" name="pageId" value="@ViewBag.pageId.ToString()" />
+            <input type="hidden" name="Categroyid" value="@ViewBag.Categroyid" />
+
+            <div class="row">
+                <div class="col-lg-3 order-lg-2">
+                    <aside class="sidebar">
+                        <div class="input-group mb-3 pb-1">
+                            <input class="form-control text-1" value="@ViewBag.Filter" placeholder="جستجو.." name="filter" id="s" type="text">
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-dark text-1 p-2"><i class="fas fa-search m-2"></i></button>
+                            </span>
+                        </div>
+                        <h5 class="txr font-weight-bold pt-4">دسته بندی ها</h5>
+                        @{
+                            List<BlogCategory> groups = ViewBag.Groups as List<BlogCategory>;
+                            List<int> selected = ViewBag.selectedGroups as List<int>;
+
+                        }
+
+
+
+                        <ul class="nav nav-list flex-column mb-5">
+                            @foreach (var group in groups.Where(g => g.ParentId == null))
+                            {
+
+                                <li class="nav-item">
+                                    <a asp-action="Index" asp-controller="Blog" asp-route-Categroyid="@group.BlogCategoryId" class="nav-link active">@group.CategoryTitle</a>
+                                    @if (groups.Any(g => g.ParentId == group.BlogCategoryId))
+                                    {
+                                        <ul>
+                                            @foreach (var sub in groups.Where(g => g.ParentId == group.BlogCategoryId))
+                                            {
+
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="Blog" asp-route-Categroyid="@sub.BlogCategoryId" class="nav-link">@sub.CategoryTitle</a></li>
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+
+                            }
+
+
+                        </ul>
+
+
+
+                        <div class="tabs tabs-dark mb-4 pb-2">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item active"><a class="nav-link text-1 font-weight-bold text-uppercase active" href="#recentPosts" data-toggle="tab">آخرین</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane" id="popularPosts">
+                                    <ul class="simple-post-list">
+                               
+                                    </ul>
+                                </div>
+                                <div class="tab-pane active" id="recentPosts">
+                                    <ul class="simple-post-list">
+                                    @await Component.InvokeAsync("LastestBlogsComponent")
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="txr font-weight-bold pt-4">درباره ما</h5>
+                        <p class="txr">مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای </p>
+                    </aside>
+                </div>
+                <div class="col-lg-9 order-lg-1">
+                    <div class="blog-posts">
+
+                        <div class="row px-3">
+                            @foreach (var item in Model.Item1)
+                            {
+                                <div class="col-sm-6">
+                                    <article class="post post-medium border-0 pb-0 mb-5">
+                                        <div class="post-image">
+                                            <a asp-action="SingleBlogsPage" asp-controller="Blog" asp-route-id="@item.BlogId">
+                                                <img src="/Blog/image/@item.BlogImageName" style="height:220px; width:390px" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="">
+                                            </a>
+                                        </div>
+
+                                        <div class="txr post-content">
+
+                                            <h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"><a asp-action="SingleBlogsPage" asp-controller="Blog" asp-route-id="@item.BlogId">@item.BlogTitle</a></h2>
+                                            <p>@item.ShortDescription</p>
+
+                                            <div class="post-meta">
+                                                <span><i class="far fa-user"></i> @item.Users.UserName <a href="#">نویسنده </a> </span>
+                                                <span><i class="far fa-folder"></i> <a href="#">اخبار</a>, <a href="#">مقالات</a> </span>
+                                                <span class="d-block mt-2"><a asp-action="SingleBlogsPage" asp-controller="Blog" asp-route-id="@item.BlogId" class="btn btn-xs btn-light text-1 text-uppercase">Read More</a></span>
+                                            </div>
+
+                                        </div>
+                                    </article>
+                                </div>
+
+                            }
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+
+
+                                @if (Model.Item2 > 1)
+                                {
+                                    <ul class="pagination float-right">
+
+
+                                        @for (int i = 1; i <= (int)Model.Item2; i++)
+                                        {
+
+                                            <li class="page-item  @((ViewBag.pageId == i ?"active":""))"><a class="page-link" onclick="changePage(@i)" href="#">@i</a></li>
+                                        }
+
+                                    </ul>
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+@section Scripts
+{
+
+<script>
+
+    function changePage(pageid) {
+        $("#pageid").val(pageid);
+        $("#formFilter").submit();
+    }
+
+</script>
+
+}
