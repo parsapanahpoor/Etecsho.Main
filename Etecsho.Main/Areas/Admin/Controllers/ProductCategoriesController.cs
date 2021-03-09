@@ -35,37 +35,25 @@ namespace Etecsho.Main.Areas.Admin.Controllers
             return View( _product.GetAllProductCategories());
         }
 
-        public async Task<IActionResult> Details(int? id)
+
+        public IActionResult Create(int? id)
         {
-            if (id == null)
+            return View(new ProductCategories()
             {
-                return NotFound();
-            }
 
-            var productCategories = await _context.ProductCategories
-                .FirstOrDefaultAsync(m => m.ProductCategoryId == id);
-            if (productCategories == null)
-            {
-                return NotFound();
-            }
+                ParentId = id
 
-            return View(productCategories);
-        }
-
-        public IActionResult Create()
-        {
-            return View();
+            });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductCategoryId,CategoryTitle,IsDelete,ParentId")] ProductCategories productCategories)
+        public IActionResult Create([Bind("ProductCategoryId,CategoryTitle,IsDelete,ParentId")] ProductCategories productCategories)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(productCategories);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _product.AddProductCategories(productCategories);
+                return Redirect("/Admin/ProductCategories/Index?Create=true");
             }
             return View(productCategories);
         }

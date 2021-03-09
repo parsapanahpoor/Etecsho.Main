@@ -12,7 +12,7 @@ namespace Etecsho.DataAccess.Services.Product
 
         List<ProductCategories> GetAllProductCategories();
 
-
+        void AddProductCategories(ProductCategories productCategories);
 
         #endregion
     }

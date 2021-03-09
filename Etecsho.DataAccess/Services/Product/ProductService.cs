@@ -15,6 +15,17 @@ namespace Etecsho.DataAccess.Services.Product
             _context = context;
         }
 
+        public void AddProductCategories(ProductCategories productCategories)
+        {
+            ProductCategories cat = new ProductCategories();
+            cat.CategoryTitle = productCategories.CategoryTitle;
+            cat.IsDelete = false;
+            cat.ParentId = productCategories.ParentId;
+
+            _context.ProductCategories.Add(cat);
+            _context.SaveChanges();
+        }
+
         public List<ProductCategories> GetAllProductCategories()
         {
             return _context.ProductCategories.ToList();
