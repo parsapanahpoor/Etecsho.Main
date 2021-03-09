@@ -26,9 +26,30 @@ namespace Etecsho.DataAccess.Services.Product
             _context.SaveChanges();
         }
 
+        public void DeleteProductCategories(int id)
+        {
+            ProductCategories productCategories = GetProductCatgeoriesById(id);
+            productCategories.IsDelete = true;
+            _context.Update(productCategories);
+            _context.SaveChanges();
+        }
+
         public List<ProductCategories> GetAllProductCategories()
         {
             return _context.ProductCategories.ToList();
+        }
+
+        public ProductCategories GetProductCatgeoriesById(int id)
+        {
+            return _context.ProductCategories.Find(id);
+        }
+
+        public void UpdateProductCategories(ProductCategories productCategories, int id)
+        {
+            ProductCategories category = GetProductCatgeoriesById(id);
+            category.CategoryTitle = productCategories.CategoryTitle;
+            _context.ProductCategories.Update(category);
+            _context.SaveChanges();
         }
     }
 }

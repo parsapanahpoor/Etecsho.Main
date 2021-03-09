@@ -58,14 +58,14 @@ namespace Etecsho.Main.Areas.Admin.Controllers
             return View(productCategories);
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public  IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var productCategories = await _context.ProductCategories.FindAsync(id);
+            var productCategories = _product.GetProductCatgeoriesById((int)id);
             if (productCategories == null)
             {
                 return NotFound();
@@ -76,7 +76,7 @@ namespace Etecsho.Main.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductCategoryId,CategoryTitle,IsDelete,ParentId")] ProductCategories productCategories)
+        public IActionResult Edit(int id, [Bind("ProductCategoryId,CategoryTitle,IsDelete,ParentId")] ProductCategories productCategories)
         {
             if (id != productCategories.ProductCategoryId)
             {
@@ -85,36 +85,23 @@ namespace Etecsho.Main.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(productCategories);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductCategoriesExists(productCategories.ProductCategoryId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
+                _product.UpdateProductCategories(productCategories, id);
+
+
+                return Redirect("/Admin/ProductCategories/Index?Edit=true");
             }
             return View(productCategories);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var productCategories = await _context.ProductCategories
-                .FirstOrDefaultAsync(m => m.ProductCategoryId == id);
+            var productCategories = _product.GetProductCatgeoriesById((int)id);
             if (productCategories == null)
             {
                 return NotFound();
@@ -125,17 +112,15 @@ namespace Etecsho.Main.Areas.Admin.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var productCategories = await _context.ProductCategories.FindAsync(id);
-            _context.ProductCategories.Remove(productCategories);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            _product.DeleteProductCategories((int)id);
+
+
+            return Redirect("/Admin/ProductCategories/Index?Delete=true");
         }
 
-        private bool ProductCategoriesExists(int id)
-        {
-            return _context.ProductCategories.Any(e => e.ProductCategoryId == id);
-        }
+       
     }
 }

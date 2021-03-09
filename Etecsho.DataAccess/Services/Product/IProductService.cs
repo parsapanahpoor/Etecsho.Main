@@ -14,6 +14,12 @@ namespace Etecsho.DataAccess.Services.Product
 
         void AddProductCategories(ProductCategories productCategories);
 
+        ProductCategories GetProductCatgeoriesById(int id);
+
+        void UpdateProductCategories(ProductCategories productCategories , int id );
+
+        void DeleteProductCategories(int id );
+
         #endregion
     }
 }
