@@ -1,6 +1,7 @@
 ﻿using Etecsho.Models.Entites.Blog;
 using Etecsho.Models.Entites.ContactUs;
 using Etecsho.Models.Entites.Permissions;
+using Etecsho.Models.Entites.Product;
 using Etecsho.Models.Entites.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -72,6 +73,13 @@ namespace Etecsho.DataAccess.Context
 
         #endregion
 
+        #region Product
+
+        public DbSet<ProductCategories> ProductCategories { get; set; }
+        public DbSet<ProductSelectedCategory> ProductSelectedCategory { get; set; }
+
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -108,6 +116,10 @@ namespace Etecsho.DataAccess.Context
 
              modelBuilder.Entity<Etecsho.Models.Entites.Employee.Employee>()
                   .HasQueryFilter(r => !r.IsDelete);
+
+            modelBuilder.Entity<ProductCategories>()
+                .HasQueryFilter(r => !r.IsDelete);
+
 
 
             base.OnModelCreating(modelBuilder);
