@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20210301180523_addcommmmnets.Designer.cs" />
     <Compile Remove="Migrations\20210301180650_addcomm.cs" />
     <Compile Remove="Migrations\20210301180650_addcomm.Designer.cs" />
+    <Compile Remove="Migrations\20210309211513_ProductTableChanges.cs" />
+    <Compile Remove="Migrations\20210309211513_ProductTableChanges.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

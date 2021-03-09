@@ -24,7 +24,7 @@ namespace Etecsho.Models.Entites.Product
 
         public virtual ProductCategories ProductCategories { get; set; }
 
-        //public virtual Blog Blog { get; set; }
+        public virtual Product Product { get; set; }
         #endregion
 
 

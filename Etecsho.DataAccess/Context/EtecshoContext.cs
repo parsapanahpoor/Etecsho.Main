@@ -77,6 +77,7 @@ namespace Etecsho.DataAccess.Context
 
         public DbSet<ProductCategories> ProductCategories { get; set; }
         public DbSet<ProductSelectedCategory> ProductSelectedCategory { get; set; }
+        public DbSet<Product> product { get; set; }
 
         #endregion
 
@@ -120,6 +121,8 @@ namespace Etecsho.DataAccess.Context
             modelBuilder.Entity<ProductCategories>()
                 .HasQueryFilter(r => !r.IsDelete);
 
+            modelBuilder.Entity<Product>()
+                .HasQueryFilter(r => !r.IsDelete);
 
 
             base.OnModelCreating(modelBuilder);

@@ -62,6 +62,7 @@ namespace Etecsho.Models.Entites.Users
         public virtual List<UserRole> UserRoles { get; set; }
         public virtual List<Blog.Blog> Blogs { get; set; }
         public virtual List<Blog.Video> Video { get; set; }
+        public virtual List<Product.Product> Product { get; set; }
 
         public virtual List<Models.Entites.Comment.Comment> Comments { get; set; }
         public virtual List<Models.Entites.Slider.Slider> Sliders { get; set; }

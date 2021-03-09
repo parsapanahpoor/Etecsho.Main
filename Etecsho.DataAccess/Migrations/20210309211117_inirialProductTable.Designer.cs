@@ -4,14 +4,16 @@ using Etecsho.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Etecsho.DataAccess.Migrations
 {
     [DbContext(typeof(EtecshoContext))]
-    partial class EtecshoContextModelSnapshot : ModelSnapshot
+    [Migration("20210309211117_inirialProductTable")]
+    partial class inirialProductTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -398,14 +400,14 @@ namespace Etecsho.DataAccess.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsInOffer")
+                    b.Property<bool>("IsInOffer")
                         .HasColumnType("bit");
 
                     b.Property<string>("LongDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OfferPercent")
+                    b.Property<int>("OfferPercent")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
