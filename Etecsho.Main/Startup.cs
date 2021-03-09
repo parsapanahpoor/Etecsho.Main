@@ -7,6 +7,7 @@ using Etecsho.DataAccess.Services.Blog;
 using Etecsho.DataAccess.Services.Comment;
 using Etecsho.DataAccess.Services.Employee;
 using Etecsho.DataAccess.Services.Permission;
+using Etecsho.DataAccess.Services.Product;
 using Etecsho.DataAccess.Services.Slider;
 using Etecsho.DataAccess.Services.Users;
 using Etecsho.Utilities.Convertors;
@@ -68,6 +69,7 @@ namespace Etecsho.Main
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<ISliderService, SliderService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<IProductService, ProductService>();
 
 
             #endregion
