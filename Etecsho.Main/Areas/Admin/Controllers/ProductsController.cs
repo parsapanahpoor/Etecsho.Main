@@ -18,13 +18,11 @@ namespace Etecsho.Main.Areas.Admin.Controllers
     [Authorize]
     public class ProductsController : Controller
     {
-        private readonly EtecshoContext _context;
         private IProductService _product;
         private IUserService _user;
 
-        public ProductsController(EtecshoContext context ,  IProductService product , IUserService user)
+        public ProductsController( IProductService product , IUserService user)
         {
-            _context = context;
             _product = product;
             _user = user;
         }
@@ -38,7 +36,12 @@ namespace Etecsho.Main.Areas.Admin.Controllers
             return View( _product.GetAllProducts());
         }
 
-      
+
+        public IActionResult DeletedProducts()
+        {
+            var product = _product.GetAllDeletedProducts();
+            return View(product);
+        }
 
         public IActionResult Create()
         {
@@ -120,6 +123,24 @@ namespace Etecsho.Main.Areas.Admin.Controllers
             var product = _product.GetProductByID(id);
             _product.DeleteProduct(product);
             return Redirect("/Admin/Products/Index?Delete=true");
+        }
+
+        public IActionResult LockProduct(int productid, int id)
+        {
+            var product = _product.GetProductByID(productid);
+
+            if (id == 1)
+            {
+                product.IsActive = false;
+
+            }
+            if (id == 2)
+            {
+                product.IsActive = true;
+
+            }
+            _product.UpdateProductForLock(product);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

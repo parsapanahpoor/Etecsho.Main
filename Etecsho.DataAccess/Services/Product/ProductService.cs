@@ -104,6 +104,14 @@ namespace Etecsho.DataAccess.Services.Product
             AddCategoryToProduct(Categories, productid);
         }
 
+        public List<Models.Entites.Product.Product> GetAllDeletedProducts()
+        {
+            IQueryable<Models.Entites.Product.Product> result = _context.product.Include(p => p.Users)
+                          .IgnoreQueryFilters().Where(u => u.IsDelete);
+
+            return result.ToList();
+        }
+
         public List<ProductCategories> GetAllProductCategories()
         {
             return _context.ProductCategories.ToList();
@@ -178,6 +186,12 @@ namespace Etecsho.DataAccess.Services.Product
             ProductCategories category = GetProductCatgeoriesById(id);
             category.CategoryTitle = productCategories.CategoryTitle;
             _context.ProductCategories.Update(category);
+            _context.SaveChanges();
+        }
+
+        public void UpdateProductForLock(Models.Entites.Product.Product product)
+        {
+            _context.Update(product);
             _context.SaveChanges();
         }
     }

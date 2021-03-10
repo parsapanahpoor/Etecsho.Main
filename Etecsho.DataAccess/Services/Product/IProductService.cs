@@ -42,6 +42,10 @@ namespace Etecsho.DataAccess.Services.Product
 
         void DeleteProduct(Models.Entites.Product.Product product);
 
+        List<Models.Entites.Product.Product> GetAllDeletedProducts();
+
+        void UpdateProductForLock(Models.Entites.Product.Product product);
+
 
         #endregion
     }

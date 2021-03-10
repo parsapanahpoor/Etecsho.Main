@@ -170,12 +170,12 @@
                                                 <td>@item.CreateDate.ToShamsi()</td>
                                                 @if (item.IsActive)
                                                 {
-                                                    <td><a href="/Admin/Products/LockUser?blogid=@item.ProductID&&id=1" class="btn btn-success btn-sm" style="color:white;">فعال</a></td>
+                                                    <td><a href="/Admin/Products/LockProduct?productid=@item.ProductID&&id=1" class="btn btn-success btn-sm" style="color:white;">فعال</a></td>
 
                                                 }
                                                 @if (!item.IsActive)
                                                 {
-                                                    <td><a href="/Admin/Products/LockUser?blogid=@item.ProductID&&id=2" class="btn btn-danger btn-sm" style="color:white;">غیر فعال</a></td>
+                                                    <td><a href="/Admin/Products/LockProduct?productid=@item.ProductID&&id=2" class="btn btn-danger btn-sm" style="color:white;">غیر فعال</a></td>
                                                 }
 
 
@@ -183,21 +183,21 @@
 
                                                 <td>
 
-                                                    <a class="btn btn-warning btn-sm waves-effect" asp-action="Edit" asp-area="Admin" asp-controller="Products" asp-route-id="@item.ProductID">
+                                                    <a class="badge badge-warning" asp-action="Edit" asp-area="Admin" asp-controller="Products" asp-route-id="@item.ProductID">
                                                         <i class="glyphicon glyphicon-edit"></i>
                                                         ویرایش
                                                     </a>
 
-                                                    <a class="btn btn-info btn-sm waves-effect" href="/Admin/Products/Edit?id=@item.ProductID&&Detail=true" >
+                                                    <a class="badge badge-primary" href="/Admin/Products/Edit?id=@item.ProductID&&Detail=true" >
                                                         <i class="glyphicon glyphicon-edit"></i>
                                                         اطلاعات
                                                     </a>
 
-                                                    <a class="btn btn-danger btn-sm waves-effect" href="/Admin/Products/Edit?id=@item.ProductID&&Delete=true">
+                                                    <a class="badge badge-danger" href="/Admin/Products/Edit?id=@item.ProductID&&Delete=true">
                                                         <i class="glyphicon glyphicon-trash"></i>
                                                         حذف
                                                     </a>
-                                                    <a class="btn btn-primary btn-sm waves-effect" href="/Admin/Products/ShowProductComments?blogid=@item.ProductID">
+                                                    <a class="badge badge-info" href="/Admin/Products/ShowProductComments?blogid=@item.ProductID">
                                                         <i class="glyphicon glyphicon-trash"></i>
                                                         کامنت ها
                                                     </a>
