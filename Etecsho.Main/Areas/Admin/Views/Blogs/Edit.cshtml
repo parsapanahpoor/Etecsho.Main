@@ -5,7 +5,6 @@
     ViewData["Title"] = "ویرایش";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     List<BlogCategory> BlogsCategories = ViewData["BlogsCategories"] as List<BlogCategory>;
-    List<BlogSelectedCategory> BlogSelectedCategory = ViewData["BlogSelectedCategory"] as List<BlogSelectedCategory>;
 
 }
 <div class="content-wrapper" style="min-height: 805px;">
@@ -131,7 +130,7 @@
                                         @foreach (var category in BlogsCategories.Where(p => p.ParentId == null))
                                         {
                                             <div style="padding-right: 40px; margin-right:10px; margin-top:10px;">
-                                                <input @((BlogSelectedCategory.Any(r => r.BlogCategoryId == category.BlogCategoryId) ? "checked" : "")) class="form-check-input" type="checkbox" name="SelectedCategory" value="@category.BlogCategoryId">
+                                                <input class="form-check-input" @((Model.BlogSelectedCategory.Any(r => r.BlogCategoryId == category.BlogCategoryId) ? "checked" : "")) type="checkbox" name="SelectedCategory" value="@category.BlogCategoryId">
                                                 <label class="form-check-label"> @category.CategoryTitle</label>
                                             </div>
 
@@ -141,7 +140,7 @@
                                                 {
                                                     <div style=" padding-right: 60px; margin-right: 20px; margin-top:5px;">
 
-                                                        <input class="form-check-input" type="checkbox" name="SelectedCategory" @((BlogSelectedCategory.Any(r => r.BlogCategoryId == category.BlogCategoryId) ? "checked" : "")) value="@sub.BlogCategoryId">
+                                                        <input class="form-check-input" @((Model.BlogSelectedCategory.Any(r => r.BlogCategoryId == sub.BlogCategoryId) ? "checked" : "")) type="checkbox" name="SelectedCategory" value="@sub.BlogCategoryId">
                                                         <label class="form-check-label"> @sub.CategoryTitle</label>
                                                     </div>
                                                 }

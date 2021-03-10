@@ -89,6 +89,14 @@ namespace Etecsho.DataAccess.Services.Product
             _context.SaveChanges();
         }
 
+        public void EditProductSelectedCategory(List<int> Categories, int productid)
+        {
+            _context.ProductSelectedCategory.Where(p => p.ProductID == productid).ToList()
+                                                    .ForEach(p => _context.ProductSelectedCategory.Remove(p));
+
+            AddCategoryToProduct(Categories, productid);
+        }
+
         public List<ProductCategories> GetAllProductCategories()
         {
             return _context.ProductCategories.ToList();
@@ -99,9 +107,63 @@ namespace Etecsho.DataAccess.Services.Product
             return _context.product.Include(p=>p.Users).ToList();
         }
 
+        public List<ProductSelectedCategory> GetAllProductSelectedCategories()
+        {
+            return _context.ProductSelectedCategory.ToList();
+        }
+
+        public Models.Entites.Product.Product GetProductByID(int productid)
+        {
+            return _context.product.Include(p => p.Users).FirstOrDefault(p => p.ProductID == productid);
+        }
+
         public ProductCategories GetProductCatgeoriesById(int id)
         {
             return _context.ProductCategories.Find(id);
+        }
+
+        public int UpdateProduct(Models.Entites.Product.Product product, IFormFile imgProductUp)
+        {
+            //TODO Check Image
+            if (imgProductUp != null && imgProductUp.IsImage())
+            {
+
+                if (product.ProductImageName != "no-photo.png")
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Product/image", product.ProductImageName);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                    string deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Product/thumb", product.ProductImageName);
+                    if (File.Exists(deletethumbPath))
+                    {
+                        File.Delete(deletethumbPath);
+                    }
+                }
+
+
+
+                product.ProductImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgProductUp.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Product/image", product.ProductImageName);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgProductUp.CopyTo(stream);
+                }
+
+                ImageConvertor imgResizer = new ImageConvertor();
+                string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Product/thumb", product.ProductImageName);
+
+                imgResizer.Image_resize(imagePath, thumbPath, 150);
+            }
+
+
+            _context.product.Update(product);
+            _context.SaveChanges();
+
+            return product.ProductID;
         }
 
         public void UpdateProductCategories(ProductCategories productCategories, int id)

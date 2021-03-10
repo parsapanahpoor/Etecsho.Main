@@ -32,6 +32,15 @@ namespace Etecsho.DataAccess.Services.Product
 
         void AddCategoryToProduct(List<int> Categories, int ProductID);
 
+        Models.Entites.Product.Product GetProductByID(int productid);
+
+        List<ProductSelectedCategory> GetAllProductSelectedCategories();
+
+        int UpdateProduct(Models.Entites.Product.Product product, IFormFile imgProductUp);
+
+        void EditProductSelectedCategory(List<int> Categories, int productid);
+
+
         #endregion
     }
 }

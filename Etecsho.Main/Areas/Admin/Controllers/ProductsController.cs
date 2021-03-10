@@ -85,24 +85,28 @@ namespace Etecsho.Main.Areas.Admin.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
+
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.product.FindAsync(id);
+            var product = _product.GetProductByID((int)id);
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", product.UserId);
+            ViewData["ProductCategories"] = _product.GetAllProductCategories();
+            ViewData["ProductSelectedCategories"] = _product.GetAllProductSelectedCategories();
+
             return View(product);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,UserId,ProductTitle,ShortDescription,LongDescription,ProductImageName,OfferPercent,IsInOffer,ProductCount,Price,Tags,CreateDate,IsActive,IsDelete")] Product product)
+        public IActionResult Edit(int id, [Bind("ProductID,UserId,ProductTitle,ShortDescription,LongDescription,ProductImageName,OfferPercent,IsInOffer,ProductCount,Price,Tags,CreateDate,IsActive,IsDelete")] Product product, IFormFile imgProductUp, List<int> SelectedCategory)
         {
             if (id != product.ProductID)
             {
@@ -111,25 +115,17 @@ namespace Etecsho.Main.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.ProductID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
+
+                var productid = _product.UpdateProduct(product, imgProductUp);
+                _product.EditProductSelectedCategory(SelectedCategory, productid);
+
+                return Redirect("/Admin/Products/Index?Edit=true");
+
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", product.UserId);
+            ViewData["ProductCategories"] = _product.GetAllProductCategories();
+            ViewData["ProductSelectedCategories"] = _product.GetAllProductSelectedCategories();
+
             return View(product);
         }
 
