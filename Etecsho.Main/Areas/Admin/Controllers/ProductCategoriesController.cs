@@ -16,12 +16,10 @@ namespace Etecsho.Main.Areas.Admin.Controllers
     [Authorize]
     public class ProductCategoriesController : Controller
     {
-        private readonly EtecshoContext _context;
         private IProductService _product;
 
-        public ProductCategoriesController(EtecshoContext context , IProductService product)
+        public ProductCategoriesController( IProductService product)
         {
-            _context = context;
             _product = product;
         }
 

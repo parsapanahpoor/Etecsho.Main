@@ -1,5 +1,6 @@
 ﻿using Etecsho.DataAccess.Context;
 using Etecsho.Models.Entites.Product;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,11 @@ namespace Etecsho.DataAccess.Services.Product
         public List<ProductCategories> GetAllProductCategories()
         {
             return _context.ProductCategories.ToList();
+        }
+
+        public List<Models.Entites.Product.Product> GetAllProducts()
+        {
+            return _context.product.Include(p=>p.Users).ToList();
         }
 
         public ProductCategories GetProductCatgeoriesById(int id)

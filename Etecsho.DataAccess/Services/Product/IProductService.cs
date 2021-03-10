@@ -21,5 +21,11 @@ namespace Etecsho.DataAccess.Services.Product
         void DeleteProductCategories(int id );
 
         #endregion
+
+        #region Product
+
+        List<Models.Entites.Product.Product> GetAllProducts();
+
+        #endregion
     }
 }
