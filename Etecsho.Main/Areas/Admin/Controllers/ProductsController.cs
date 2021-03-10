@@ -38,23 +38,7 @@ namespace Etecsho.Main.Areas.Admin.Controllers
             return View( _product.GetAllProducts());
         }
 
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var product = await _context.product
-                .Include(p => p.Users)
-                .FirstOrDefaultAsync(m => m.ProductID == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
-        }
+      
 
         public IActionResult Create()
         {
@@ -83,8 +67,10 @@ namespace Etecsho.Main.Areas.Admin.Controllers
             return View(product);
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id , bool Detail = false , bool Delete = false)
         {
+            ViewBag.Detail = Detail;
+            ViewBag.Delete = Delete;
 
 
             if (id == null)
@@ -129,37 +115,11 @@ namespace Etecsho.Main.Areas.Admin.Controllers
             return View(product);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var product = await _context.product
-                .Include(p => p.Users)
-                .FirstOrDefaultAsync(m => m.ProductID == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var product = await _context.product.FindAsync(id);
-            _context.product.Remove(product);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProductExists(int id)
-        {
-            return _context.product.Any(e => e.ProductID == id);
+            var product = _product.GetProductByID(id);
+            _product.DeleteProduct(product);
+            return Redirect("/Admin/Products/Index?Delete=true");
         }
     }
 }

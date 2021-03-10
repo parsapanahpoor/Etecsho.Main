@@ -188,12 +188,12 @@
                                                         ویرایش
                                                     </a>
 
-                                                    <a class="btn btn-info btn-sm waves-effect" asp-action="Details" asp-area="Admin" asp-controller="Products" asp-route-id="@item.ProductID">
+                                                    <a class="btn btn-info btn-sm waves-effect" href="/Admin/Products/Edit?id=@item.ProductID&&Detail=true" >
                                                         <i class="glyphicon glyphicon-edit"></i>
                                                         اطلاعات
                                                     </a>
 
-                                                    <a class="btn btn-danger btn-sm waves-effect" href="/Admin/Products/Details?id=@item.ProductID&&Delete=true">
+                                                    <a class="btn btn-danger btn-sm waves-effect" href="/Admin/Products/Edit?id=@item.ProductID&&Delete=true">
                                                         <i class="glyphicon glyphicon-trash"></i>
                                                         حذف
                                                     </a>

@@ -96,7 +96,21 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-success">ارسال</button>
+
+                                    @if (ViewBag.Delete == false && ViewBag.Detail == false)
+                                    {
+                                        <button type="submit" class="btn btn-success">ارسال</button>
+
+                                    }
+                                    @if (ViewBag.Delete != false)
+                                    {
+
+                                        <a asp-action="Delete" asp-route-id="@Model.ProductID" asp-controller="Products" asp-area="Admin" class="btn btn-danger">حذف   </a>
+
+                                    }
+
+                                  
+
                                     <a asp-action="Index" asp-controller="Products" asp-area="Admin" class="btn btn-primary">بازگشت به عقب </a>
                                 </div>
                             </div>

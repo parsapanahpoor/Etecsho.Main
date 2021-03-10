@@ -40,6 +40,8 @@ namespace Etecsho.DataAccess.Services.Product
 
         void EditProductSelectedCategory(List<int> Categories, int productid);
 
+        void DeleteProduct(Models.Entites.Product.Product product);
+
 
         #endregion
     }

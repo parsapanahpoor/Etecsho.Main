@@ -81,6 +81,13 @@ namespace Etecsho.DataAccess.Services.Product
             _context.SaveChanges();
         }
 
+        public void DeleteProduct(Models.Entites.Product.Product product)
+        {
+            product.IsDelete = true;
+            _context.Update(product);
+            _context.SaveChanges();
+        }
+
         public void DeleteProductCategories(int id)
         {
             ProductCategories productCategories = GetProductCatgeoriesById(id);
