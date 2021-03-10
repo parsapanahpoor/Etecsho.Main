@@ -9,6 +9,8 @@ using Etecsho.DataAccess.Context;
 using Etecsho.Models.Entites.Product;
 using Microsoft.AspNetCore.Authorization;
 using Etecsho.DataAccess.Services.Product;
+using Microsoft.AspNetCore.Http;
+using Etecsho.DataAccess.Services.Users;
 
 namespace Etecsho.Main.Areas.Admin.Controllers
 {
@@ -18,11 +20,13 @@ namespace Etecsho.Main.Areas.Admin.Controllers
     {
         private readonly EtecshoContext _context;
         private IProductService _product;
+        private IUserService _user;
 
-        public ProductsController(EtecshoContext context ,  IProductService product)
+        public ProductsController(EtecshoContext context ,  IProductService product , IUserService user)
         {
             _context = context;
             _product = product;
+            _user = user;
         }
 
         public IActionResult Index(bool Create = false, bool Edit = false, bool Delete = false)
@@ -54,22 +58,28 @@ namespace Etecsho.Main.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
+            ViewData["ProductCategories"] = _product.GetAllProductCategories();
+
             return View();
         }
 
    
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,UserId,ProductTitle,ShortDescription,LongDescription,ProductImageName,OfferPercent,IsInOffer,ProductCount,Price,Tags,CreateDate,IsActive,IsDelete")] Product product)
+        public IActionResult Create([Bind("ProductID,UserId,ProductTitle,ShortDescription,LongDescription,ProductImageName,OfferPercent,IsInOffer,ProductCount,Price,Tags,CreateDate,IsActive,IsDelete")] Product product, IFormFile imgProductUp, List<int> SelectedCategory)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var user = _user.GetUserByUserName(User.Identity.Name);
+                var ProductID = _product.AddProduct(product, imgProductUp, user);
+                _product.AddCategoryToProduct(SelectedCategory, ProductID);
+
+
+                return Redirect("/Admin/Products/Index?Create=true");
+
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", product.UserId);
+            ViewData["ProductCategories"] = _product.GetAllProductCategories();
+
             return View(product);
         }
 
