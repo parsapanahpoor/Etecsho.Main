@@ -48,5 +48,17 @@ namespace Etecsho.DataAccess.Services.Product
 
 
         #endregion
+
+        #region ProductFeatures
+
+        List<ProductFeature> GetProductFeaturs(int id );
+
+        void AddFeatureToProduct(ProductFeature feature);
+
+        ProductFeature GetFeatureById(int id);
+
+        void DeleteProductFeature(ProductFeature feature);
+
+        #endregion
     }
 }

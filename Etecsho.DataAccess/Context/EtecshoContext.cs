@@ -78,6 +78,7 @@ namespace Etecsho.DataAccess.Context
         public DbSet<ProductCategories> ProductCategories { get; set; }
         public DbSet<ProductSelectedCategory> ProductSelectedCategory { get; set; }
         public DbSet<Product> product { get; set; }
+        public DbSet<ProductFeature> ProductFeature { get; set; }
 
         #endregion
 

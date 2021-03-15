@@ -181,27 +181,32 @@
 
 
 
-                                                <td>
+                                            <td>
+                                                <a class="badge badge-success " asp-action="ProductFeaturs" asp-area="Admin" asp-controller="Products" asp-route-id="@item.ProductID">
+                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                    ویژگی ها 
+                                                </a>
 
-                                                    <a class="badge badge-warning" asp-action="Edit" asp-area="Admin" asp-controller="Products" asp-route-id="@item.ProductID">
-                                                        <i class="glyphicon glyphicon-edit"></i>
-                                                        ویرایش
-                                                    </a>
+                                                <a class="badge badge-warning" asp-action="Edit" asp-area="Admin" asp-controller="Products" asp-route-id="@item.ProductID">
+                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                    ویرایش
+                                                </a>
 
-                                                    <a class="badge badge-primary" href="/Admin/Products/Edit?id=@item.ProductID&&Detail=true" >
-                                                        <i class="glyphicon glyphicon-edit"></i>
-                                                        اطلاعات
-                                                    </a>
 
-                                                    <a class="badge badge-danger" href="/Admin/Products/Edit?id=@item.ProductID&&Delete=true">
-                                                        <i class="glyphicon glyphicon-trash"></i>
-                                                        حذف
-                                                    </a>
-                                                    <a class="badge badge-info" href="/Admin/Products/ShowProductComments?blogid=@item.ProductID">
-                                                        <i class="glyphicon glyphicon-trash"></i>
-                                                        کامنت ها
-                                                    </a>
-                                                </td>
+                                                <a class="badge badge-primary" href="/Admin/Products/Edit?id=@item.ProductID&&Detail=true">
+                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                    اطلاعات
+                                                </a>
+
+                                                <a class="badge badge-danger" href="/Admin/Products/Edit?id=@item.ProductID&&Delete=true">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                    حذف
+                                                </a>
+                                                <a class="badge badge-info" href="/Admin/Products/ShowProductComments?blogid=@item.ProductID">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                    کامنت ها
+                                                </a>
+                                            </td>
                                             </tr>
                                         }
                                     </tbody>

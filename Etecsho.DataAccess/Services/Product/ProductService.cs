@@ -39,6 +39,12 @@ namespace Etecsho.DataAccess.Services.Product
             }
         }
 
+        public void AddFeatureToProduct(ProductFeature feature)
+        {
+            _context.ProductFeature.Add(feature);
+            _context.SaveChanges();
+        }
+
         public int AddProduct(Models.Entites.Product.Product product, IFormFile imgProductUp, User user)
         {
 
@@ -96,6 +102,12 @@ namespace Etecsho.DataAccess.Services.Product
             _context.SaveChanges();
         }
 
+        public void DeleteProductFeature(ProductFeature feature)
+        {
+            _context.ProductFeature.Remove(feature);
+            _context.SaveChanges();
+        }
+
         public void EditProductSelectedCategory(List<int> Categories, int productid)
         {
             _context.ProductSelectedCategory.Where(p => p.ProductID == productid).ToList()
@@ -127,6 +139,11 @@ namespace Etecsho.DataAccess.Services.Product
             return _context.ProductSelectedCategory.ToList();
         }
 
+        public ProductFeature GetFeatureById(int id)
+        {
+            return _context.ProductFeature.Find(id);
+        }
+
         public Models.Entites.Product.Product GetProductByID(int productid)
         {
             return _context.product.Include(p => p.Users).FirstOrDefault(p => p.ProductID == productid);
@@ -135,6 +152,11 @@ namespace Etecsho.DataAccess.Services.Product
         public ProductCategories GetProductCatgeoriesById(int id)
         {
             return _context.ProductCategories.Find(id);
+        }
+
+        public List<ProductFeature> GetProductFeaturs(int id)
+        {
+            return _context.ProductFeature.Where(p => p.ProductID == id).ToList();
         }
 
         public int UpdateProduct(Models.Entites.Product.Product product, IFormFile imgProductUp)

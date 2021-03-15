@@ -142,5 +142,36 @@ namespace Etecsho.Main.Areas.Admin.Controllers
             _product.UpdateProductForLock(product);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult ProductFeaturs(int id)
+        {
+            ViewBag.Features = _product.GetProductFeaturs(id);
+
+            return View(new ProductFeature()
+            {
+                ProductID = id
+            });
+        }
+
+        [HttpPost]
+        public IActionResult ProductFeaturs(ProductFeature productFeature)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _product.AddFeatureToProduct(productFeature);
+
+            }
+
+            return RedirectToAction("ProductFeaturs", new { id = productFeature.ProductID });
+
+        }
+
+        public void DeleteFeature(int id)
+        {
+            var feature = _product.GetFeatureById(id);
+            _product.DeleteProductFeature(feature);
+        }
+
     }
 }
