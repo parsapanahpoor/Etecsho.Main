@@ -63,6 +63,7 @@ namespace Etecsho.Models.Entites.Product
 
         public virtual List<ProductSelectedCategory> ProductSelectedCategory { get; set; }
         public virtual List<ProductFeature> ProductFeatures { get; set; }
+        public virtual List<ProductGallery> ProductGalleries { get; set; }
         //public virtual List<Comment.Comment> Comments { get; set; }
         public virtual User Users { get; set; }
 

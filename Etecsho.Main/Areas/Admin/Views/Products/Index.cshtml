@@ -184,7 +184,12 @@
                                             <td>
                                                 <a class="badge badge-success " asp-action="ProductFeaturs" asp-area="Admin" asp-controller="Products" asp-route-id="@item.ProductID">
                                                     <i class="glyphicon glyphicon-edit"></i>
-                                                    ویژگی ها 
+                                                    ویژگی ها
+                                                </a>
+
+                                                <a class="badge badge-secondary " asp-action="Gallery" asp-area="Admin" asp-controller="Products" asp-route-id="@item.ProductID">
+                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                     گالری تصاویر 
                                                 </a>
 
                                                 <a class="badge badge-warning" asp-action="Edit" asp-area="Admin" asp-controller="Products" asp-route-id="@item.ProductID">

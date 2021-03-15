@@ -59,6 +59,10 @@ namespace Etecsho.DataAccess.Services.Product
 
         void DeleteProductFeature(ProductFeature feature);
 
+        List<ProductGallery> GetGalleryById(int id);
+
+        void AddImageToGalleryProduct(ProductGallery productGallery , IFormFile imgUp);
+
         #endregion
     }
 }

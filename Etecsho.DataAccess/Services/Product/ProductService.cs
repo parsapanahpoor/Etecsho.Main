@@ -45,6 +45,30 @@ namespace Etecsho.DataAccess.Services.Product
             _context.SaveChanges();
         }
 
+        public void AddImageToGalleryProduct(ProductGallery productGallery, IFormFile imgUp)
+        {
+
+            productGallery.ImageName = "no-photo.png";  //تصویر پیشفرض
+            //TODO Check Image
+            if (imgUp != null && imgUp.IsImage())
+            {
+                productGallery.ImageName = NameGenerator.GenerateUniqCode() + Path.GetExtension(imgUp.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Product/image/ProducGallery", productGallery.ImageName);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgUp.CopyTo(stream);
+                }
+
+               
+            }
+
+
+            _context.Add(productGallery);
+            _context.SaveChanges();
+
+        }
+
         public int AddProduct(Models.Entites.Product.Product product, IFormFile imgProductUp, User user)
         {
 
@@ -142,6 +166,11 @@ namespace Etecsho.DataAccess.Services.Product
         public ProductFeature GetFeatureById(int id)
         {
             return _context.ProductFeature.Find(id);
+        }
+
+        public List<ProductGallery> GetGalleryById(int id)
+        {
+            return _context.ProductGallery.Where(p => p.ProductID == id).ToList();
         }
 
         public Models.Entites.Product.Product GetProductByID(int productid)

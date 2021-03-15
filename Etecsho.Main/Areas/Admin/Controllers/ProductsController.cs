@@ -173,5 +173,25 @@ namespace Etecsho.Main.Areas.Admin.Controllers
             _product.DeleteProductFeature(feature);
         }
 
+        public ActionResult Gallery(int id)
+        {
+            ViewBag.Galleries = _product.GetGalleryById(id);
+            return View(new ProductGallery()
+            {
+                ProductID = id
+            });
+        }
+        [HttpPost]
+        public ActionResult Gallery(ProductGallery galleries, IFormFile imgUp)
+        {
+            if (ModelState.IsValid)
+            {
+                _product.AddImageToGalleryProduct(galleries, imgUp);
+            }
+
+            return RedirectToAction("Gallery", new { id = galleries.ProductID });
+        }
+
+
     }
 }
